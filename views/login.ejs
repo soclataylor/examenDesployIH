@@ -1,0 +1,47 @@
+<%- include('partials/head'); -%> <!-- cargamos head ejs -->
+<%- include('partials/header'); -%> <!-- cargamos header ejs -->
+
+    <% if (login) { %>
+        <h2>Ya ha iniciado sesión.</h2>
+        <p>Será redirigido automáticamente a la página de administración</p>                 
+        <script>
+            setTimeout(function(){
+                location.replace('/admin'); 
+            }, 3000);
+            
+        </script>    
+    <% } else { %>
+        <div class="register-form">
+            <h1>Login con Node JS</h1>
+            <form action="auth" method="post">
+                <input type="text" name="user" id="user" placeholder="user" required>
+                <input type="password" name="pass" id="pass" placeholder="pass" required>
+                <input type="submit" class="btn-login" value="Login">
+            </form>
+            
+            <a href="registro" class="btn-register">Registro</a>
+    
+        </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+        <!-- si nuestro alert es diferente de undefined -->
+        <% if (typeof alert != "undefined")  { %>
+            <!-- Código script de Sweet Alert 2 donde asignamos la información que le hemos pasado en el objeto
+            Muestra el mensaje durante un 1.5s y redirige a la ruta principal-->
+            <script>
+                Swal.fire({
+                    title:'<%= alertTitle %>',
+                    text:'<%= alertMessage %>',
+                    icon:'<%= alertIcon %>',
+                    showConfirmButton: <%= showConfirmButton %>,
+                    timer: <%= timer %>
+                }).then(()=>{
+                    window.location='/<%= ruta %>'
+                })
+            </script>
+        <% } %>
+    <% } %>
+
+    
+<%- include('partials/footer'); -%>  <!-- cargamos footer ejs -->

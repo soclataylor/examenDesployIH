@@ -1,0 +1,77 @@
+<%- include('partials/head'); -%> <!-- cargamos head ejs -->
+    <script src="/resources/js/funcionescliente.js" defer></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/resources/css/tablas.css">
+<%- include('partials/header'); -%> <!-- cargamos header ejs -->
+
+    
+    <div class="contenedor2">
+        <h1>Panel de administración</h1>
+        <!-- comprueba si login es igual a true -->
+        <% if (login) { %>                
+            <h1>Usuario conectado: <br><strong><%= name %></strong></h1>   <!-- importa el valor de name pasado en el objeto de render --> 
+            <% if (rol == 'admin') { %>
+                <div class="container2">   
+                    <table class="tablab tablab-bordered tablab-striped text-center mt-4">
+                        <thead>
+                            <tr class="bg-primary text-white">
+                                <th scope="col">ID</th>
+                                <th scope="col">USUARIO</th>
+                                <th scope="col">NOMBRE</th>
+                                <th scope="col">ROL</th>            
+                                <th scope="col">ACCIONES</th>            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% results.forEach((user)=>{ %>
+                                <tr>  
+                                    <td><%= user.id %></td>  
+                                    <td><%= user.user %></td>
+                                    <td><%= user.name %></td>
+                                    <td><%= user.rol %></td>
+                                    <td>
+                                    <a href="/edit/<%= user.id %>" class="btn btn-outline-info"><i class='bx bxs-edit'></i></a>
+                                    <a href="/delete/<%= user.id %>" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a>                   
+                                    </td>
+                                </tr>                                   
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- <div class="login-form">
+                    <h1>Suma de números del lado del servidor</h1>
+                    <form action="suma" method="post">
+                        <input type="number" name="num1" id="num1" placeholder="num1" required>
+                        <input type="number" name="num2" id="num2" placeholder="num2" required>
+                        <br>
+                        <br>
+                        <input type="submit" class="btn-login" value="Sumar">
+                    </form>
+                </div> -->
+            <% } %>
+
+            <div class="login-form">
+                <h1>Multiplicación de números del lado del cliente</h1>
+                <form>
+                    <input type="number" name="nume1" id="nume1" placeholder="nume1" required>
+                    <input type="number" name="nume2" id="nume2" placeholder="nume2" required>
+                </form>
+                <br>
+                <button onclick="multiplicar()" class="btn-login">Multiplicar</button>
+                <h2 id="total"></h2>
+        
+            </div>
+        <%} else { %>
+            <h1><strong><%= name %></strong></h1>   
+            <a href="login" class="a-login">Iniciar sesión</a>
+        <% } %>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<%- include('partials/footer'); -%>  <!-- cargamos footer ejs -->

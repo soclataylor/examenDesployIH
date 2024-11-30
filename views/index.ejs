@@ -1,0 +1,18 @@
+<%- include('partials/head'); -%>
+<!-- cargamos head ejs -->
+<%- include('partials/header'); -%>
+<!-- cargamos header ejs -->
+
+<div class="contenedor2">
+    <h1>Página de Inicio - Despliegue</h1>
+    <div class="image-container">
+        <img src="resources/img/iron.jpg" alt="Centro" class="hover-image" />
+    </div>
+    <% if (login) { %>
+    <h1>Usuario conectado: <strong><%= name %></strong></h1>
+    <%} else { %>
+    <h1><strong><%= name %></strong></h1>
+    <% } %>
+</div>
+<%- include('partials/footer'); -%>
+<!-- cargamos footer ejs -->
